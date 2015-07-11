@@ -32,10 +32,14 @@ a {
   font-family: 'Bitter', serif;
 }
 
+.about h3 {
+  font-family: 'Bitter', serif;
+}
+
 .about p {
   padding-top: 20px;
   font-family: 'Lato', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .audience {
@@ -43,7 +47,7 @@ a {
     padding-bottom: 85px;
 	text-align: center;
 	background-color: #E3E4E9;
-	color: black;
+	color: #2F4F4F;
 }
 
 .audience h2 {
@@ -53,5 +57,5 @@ a {
 .audience p {
 	padding-top: 20px;
 	font-family: 'Lato', sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 }
