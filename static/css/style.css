@@ -44,7 +44,7 @@ a {
 
 .audience {
 	padding-top: 85px;
-    padding-bottom: 85px;
+  padding-bottom: 85px;
 	text-align: center;
 	background-color: #E3E4E9;
 	color: #2F4F4F;
@@ -55,7 +55,31 @@ a {
 }
 
 .audience p {
-	padding-top: 20px;
+  padding-top: 20px;
 	font-family: 'Lato', sans-serif;
 	font-size: 16px;
+}
+
+.form {
+  text-align: center;
+  width: 300px;
+  background-color: #137A7F;
+  border-radius: 6px;
+  margin: 85px auto 80px auto;
+  display: block;
+  position: relative;
+  font-family: 'Lato', sans-serif;
+}
+
+.form p {
+  padding-top: 2px;
+}
+
+input {
+  width: 200px;
+  height: 40px;
+  border-radius: 3px;
+  background-color: white;
+  border: none;
+  margin: 10px;
 }
