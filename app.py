@@ -3,6 +3,8 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
+from werkzeug import secure_filename
+import os
 import datetime
 
 # configuration
@@ -11,6 +13,8 @@ DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
+UPLOAD_FOLDER = 'static/csv'
+ALLOWED_EXTENSIONS = set(['txt', 'csv'])
 
 # create application
 app = Flask(__name__)
@@ -48,11 +52,44 @@ def query_db(query, args=(), one=False):
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route('/')
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    
-    return render_template('index.html')
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('upload_file',
+                                    filename=filename))
+        return redirect(url_for('upload_file', filename=filename))
+
+    else:
+        return render_template('index.html')
+
+
+@app.route('/test', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('upload_file',
+                                    filename=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+    </form>
+    '''
 
 
 if __name__ == '__main__':
