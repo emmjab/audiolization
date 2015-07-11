@@ -1,0 +1,57 @@
+.navbar {
+	background-color: #FF7373;
+}
+
+.nav a {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 10px;
+  text-transform: uppercase;
+}
+
+.navbar-brand {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 10px;
+  text-transform: uppercase;
+}
+
+a {
+	color: #FF7373;
+}
+
+.about {
+  padding-top: 125px;
+  padding-bottom: 85px;
+  text-align: center;
+  background-color: #86CECB;
+  color: #FFF;
+}
+
+.about h1 {
+  font-family: 'Bitter', serif;
+}
+
+.about p {
+  padding-top: 20px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+}
+
+.audience {
+	padding-top: 85px;
+    padding-bottom: 85px;
+	text-align: center;
+	background-color: #E3E4E9;
+	color: black;
+}
+
+.audience h2 {
+	font-family: 'Bitter', serif;
+}
+
+.audience p {
+	padding-top: 20px;
+	font-family: 'Lato', sans-serif;
+	font-size: 14px;
+}
