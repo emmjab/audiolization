@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,700italic|Bitter:400,700,400italic' rel='stylesheet' type='text/css'>
     <title>Audiolyzer</title>
 </head>
@@ -55,3 +55,8 @@
       	  <h2>Audience</h2>
       	  <p>Our audience is comprised of visually impaired users. In the U.S. alone, <a href="https://nfb.org/blindness-statistics">there are 6,670,300 blind adults</a>.</p>
       	  <p>In the future, we hope that radio stations, podcasts and other audio outlets will be able to use this software.</p>
+
+<form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+</form>
