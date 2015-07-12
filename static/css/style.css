@@ -50,7 +50,7 @@ a {
 	color: #2F4F4F;
 }
 
-#audience h2 {
+#audience h1 {
 	font-family: 'Bitter', serif;
 }
 
@@ -94,4 +94,12 @@ input {
 
 #share a {
   padding: 20px;
+}
+
+#connect {
+  padding-top: 85px;
+  padding-bottom: 85px;
+  text-align: center;
+  background-color: #137A7F;
+  color: #fff;
 }
