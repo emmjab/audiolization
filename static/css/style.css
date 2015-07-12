@@ -103,3 +103,17 @@ input {
   background-color: #137A7F;
   color: #fff;
 }
+
+#connect h3 {
+  font-family: 'Bitter', serif;
+}
+
+#connect p {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+#connect img {
+  border-radius:80px;
+  margin: 20px;
+}
