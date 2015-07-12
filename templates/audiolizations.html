@@ -34,8 +34,8 @@
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 1000 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
@@ -50,7 +50,7 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
-    .ticks(10, "%");
+    .ticks(10);
 
 var svg = d3.select("#viz").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -58,16 +58,24 @@ var svg = d3.select("#viz").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("{{ url_for('static', filename='csv/data.tsv') }}", type, function(error, data) {
+//d3.tsv("{{ url_for('static', filename='csv/data.tsv') }}", type, function(error, data) {
+d3.csv("{{ url_for('static', filename='csv/Shark_by_sex.csv') }}", type, function(error, data) {
   if (error) throw error;
 
-  x.domain(data.map(function(d) { return d.letter; }));
-  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+  x.domain(data.map(function(d) { return d.Year; }));
+  y.domain([0, d3.max(data, function(d) { return d.Male; })]);
 
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+      .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", "-0.5em")
+            .attr("transform", function(d) {
+                return "rotate(-90)" 
+                });
 
   svg.append("g")
       .attr("class", "y axis")
@@ -77,22 +85,28 @@ d3.tsv("{{ url_for('static', filename='csv/data.tsv') }}", type, function(error,
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Frequency");
+      .text("Count");
 
   svg.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
+      .attr("x", function(d) { return x(d.Year); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); });
+      .attr("y", function(d) { return y(d.Male); })
+      .attr("height", function(d) { return height - y(d.Male); });
 });
 
 function type(d) {
-  d.frequency = +d.frequency;
+  d.Male = +d.Male;
   return d;
 }
+
+
+
+
+//// END D3
+//// START SOUND
 
 function sgraph() {
     tones.type = "sine";
