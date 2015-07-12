@@ -1,7 +1,7 @@
 <html>
 	<head>
-		<title> Audiolyzer </title>
-		<link rel='stylesheet' href={{ url_for('static', filename='css/styles.css') }} />
+		<title>Audiolyzer</title>
+		<link rel='stylesheet' href={{ url_for('static', filename='css/style.css') }} />
 
 		{% block style %}
 
@@ -9,9 +9,10 @@
 	</head>
 
 	<body>
+	  <div id="layout-top">
 		<h1>Audiolyzer</h1>
-		<h2>Seeing with your ears.</h2>
-
+        <h3>Listen to your data.</h3>
+      </div>
 		{% block content %}
 
 		{% endblock %}

@@ -1,43 +1,21 @@
 {% include 'layout.html' %}
 
 {% block style %}
-<style>
-
-.bar {
-  fill: steelblue;
-}
-
-.bar:hover {
-  fill: brown;
-}
-
-.axis {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
-}
-
-#viz {
-}
-
-</style>
 
 {% endblock %}
 
+<head>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+
 {% block content %}
-<div id="viz"></div>
-<button id="sgraph" onclick="sgraph()">PLEASE MAKE ME AN ICON</button>
+<body>
 
-
+<div id="viz">
+  <button id="sgraph" onclick="sgraph()">
+    <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play" width="50" height="50"/>
+  </button>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='js/tones.js') }}"></script>
 <script>
@@ -139,7 +117,7 @@ function sgraph() {
 
 </script>
 
-
+</body>
 
 
 {% endblock %}
