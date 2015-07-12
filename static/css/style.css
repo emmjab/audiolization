@@ -121,7 +121,16 @@ input {
   color: #fff;
   padding-top: 125px;
   padding-bottom: 85px;
+}
+
+#article h1 {
+  font-family: 'Bitter', serif;
   text-align: center;
+  padding-bottom: 20px;
+}
+
+#article p {
+  font-family: 'Lato', sans-serif;
 }
 
 #layout-top {
