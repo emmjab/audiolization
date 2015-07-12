@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,700italic|Bitter:400,700,400italic' rel='stylesheet' type='text/css'>
+    <title>Audiolyzer</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" id="site-navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#about">Audiolyzer</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="page-scroll">
+            <a href="#about">About</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#audience">Audience</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#share">Share</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#makers">Makers</a>
+          </li>
+          <li>
+            <a href="{{ url_for('static', filename='sharkstory.html') }}" target="_blank">Article</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+
+    <div id="about">
+      <div class="container">
+      	<div class="row">
+      	  <h1>Audiolyzer</h1>
+          <h3>Listen to your data.</h3>
+      	  <p>Audiolyzer is an alternative to visualizing data by turning the visual parameters into sound.</p>
+      	</div>
+      </div>
+    </div>
+
+    <div id="audience">
+      <div class="container">
+      	<div class="row">
+      	  <h1>Audience</h1>
+      	  <p>Our audience is comprised of visually impaired users. In the U.S. alone, <a href="https://nfb.org/blindness-statistics">there are 6,670,300 blind adults</a>.</p>
+      	  <p>In the future, we hope that radio stations, podcasts and other audio outlets will be able to use this software.</p>
+
+  <div id="form">
+    <form action="" method=post enctype=multipart/form-data>
+      <p>
+        <input type=file name=file>
+        <input type=submit value=Upload>
+      </p>
+    </form>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+  <div id="share">
+    <div class="container">
+      <div class="row">
+        <!--Facebook-->
+        <a href="http://www.facebook.com/sharer.php?u=#" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Share on Facebook" />
+        </a>
+        <!--Twitter-->
+        <a href="https://twitter.com/share?url=#&amp;name=Simple Share Buttons&amp;hashtags=simplesharebuttons" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Share on Twitter"/>
+        </a>
+        <!--LinkedIn-->
+        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=#" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="Share on LinkedIn"/>
+        </a>
+        <!--Buffer-->
+        <a href="https://bufferapp.com/add?url=#&amp;text=Simple Share Buttons" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer this"/>
+        </a>
+      </div>
+    </div>  
+  </div>
+
+  <div id="makers">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+        <!--Rowan-->
+          <h3>Rowan Walrath</h3>
+          <img src="http://i.imgur.com/DhPjkQo.jpg" alt="Bitmoji of a cartoonized Rowan Walrath winking"/ width="80" height="80">
+          <p>Rowan is a journalism student at Northeastern University and managing editor of <a href="huntnewsnu.com">The Huntington News</a>. She learned to do some front-end stuff.</p>
+        </div>
+        <div class="col-md-3">
+        <!--Emma-->
+          <h3>Emma Jablonski</h3>
+          <img src="http://i.imgur.com/w1sbZI4.jpg" alt="Bitmoji of a cartoonized Emma Jablonski"/ width="80" height="80">
+          <p>Emma is a riddle wrapped in a mystery inside an enigma.</p>
+        </div>
+        <div class="col-md-3">
+        <!--Danny-->
+          <h3>Danny Nett</h3>
+          <img src="http://i.imgur.com/W8vdjdn.jpg" alt="Bitmoji of a cartoonized Danny Nett" width="80" height="80"/>
+          <p>Danny is a journalism student at UNC Chapel Hill. He's also an enterpreneurial journalist at <a href="http://reesenewslab.org/">Reese News Lab</a>, community manager at <a href="http://dailytarheel.com/">The Daily Tar Heel</a> and copyeditor at <a href="http://southernneighbor.com/">Southern Neighbor</a>.</p>
+        </div>
+        <div class="col-md-3">
+        <!--Elaine-->
+          <h3>Elaine Ayo</h3>
+          <img src="http://i.imgur.com/vz59gGf.jpg" alt="Bitmoji of a cartoonized Elaine Ayo" width="80" height="80"/>
+          <p>Elaine is a riddle wrapped in a mystery inside an enigma.</p>
+        </div>
+      </div>
+    </div>
+  </div>
