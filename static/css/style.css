@@ -116,6 +116,14 @@ input {
   margin: 20px;
 }
 
+#article {
+  background-color: #86CECB;
+  color: #fff;
+  padding-top: 125px;
+  padding-bottom: 85px;
+  text-align: center;
+}
+
 #layout-top {
   padding-top: 85px;
   padding-bottom: 85px;

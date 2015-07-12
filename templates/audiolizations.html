@@ -1,17 +1,4 @@
-{% include 'layout.html' %}
-
-{% block style %}
-<style>
-
-.bar {
-  fill: steelblue;
-}
-
-<<<<<<< HEAD
-.bar:hover {
-  fill: brown;
-}
-=======
+<!DOCTYPE html>
 <head>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -21,36 +8,18 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:400|Bitter:400' rel='stylesheet' type='text/css'>
   <title>Audiolyzer Test</title>
 </head>
->>>>>>> origin/master
 
-.axis {
-  font: 10px sans-serif;
-}
+<body>
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
+    <div id="about">
+      <div class="container">
+        <div class="row">
+          <h1>Audiolyzer</h1>
+          <h3>Listen to your data.</h3>
+        </div>
+      </div>
+    </div>
 
-.x.axis path {
-  display: none;
-}
-
-<<<<<<< HEAD
-#viz {
-}
-
-</style>
-
-{% endblock %}
-
-{% block content %}
-<div id="viz"></div>
-<button id="sgraph" onclick="sgraph()">PLEASE MAKE ME AN ICON</button>
-
-=======
 <div class="row sgraph-background">
     <button id="sgraph" onclick="sgraph()">
       <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
@@ -59,7 +28,6 @@
 
 <div id="viz">
 </div>
->>>>>>> origin/master
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='js/tones.js') }}"></script>
@@ -68,7 +36,7 @@
 
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
+    width = 500 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var x0 = d3.scale.ordinal()
@@ -91,7 +59,7 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .tickFormat(d3.format(".2s"));
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("viz").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -203,7 +171,5 @@ function sgraph() {
 
 </script>
 
-
-
-
-{% endblock %}
+</body>
+</html>
