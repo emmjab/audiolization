@@ -1,0 +1,184 @@
+.nav a {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 10px;
+  text-transform: uppercase;
+}
+
+.navbar-brand {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 10px;
+  text-transform: uppercase;
+}
+
+a {
+	color: #FF7373;
+}
+
+#about {
+  padding-top: 125px;
+  padding-bottom: 85px;
+  text-align: center;
+  background-color: #86CECB;
+  color: #FFF;
+}
+
+#about h1 {
+  font-family: 'Bitter', serif;
+}
+
+#about h3 {
+  font-family: 'Bitter', serif;
+}
+
+#about p {
+  padding-top: 20px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+#audience {
+	padding-top: 85px;
+  padding-bottom: 85px;
+	text-align: center;
+	background-color: #E3E4E9;
+	color: #2F4F4F;
+}
+
+#audience h1 {
+	font-family: 'Bitter', serif;
+}
+
+#audience p {
+  padding-top: 20px;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+}
+
+#form {
+  text-align: center;
+  width: 300px;
+  background-color: #137A7F;
+  border-radius: 6px;
+  margin: 85px auto 80px auto;
+  display: block;
+  position: relative;
+  font-family: 'Lato', sans-serif;
+}
+
+#form p {
+  padding-top: 2px;
+}
+
+input {
+  width: 280px;
+  height: 40px;
+  border-radius: 3px;
+  background-color: white;
+  border: none;
+  margin: 10px;
+}
+
+#share {
+  padding-top: 85px;
+  padding-bottom: 85px;
+  text-align: center;
+  background-color: #86CECB;
+  color: #FFF;
+}
+
+#share a {
+  padding: 20px;
+}
+
+#makers {
+  padding-top: 85px;
+  padding-bottom: 85px;
+  text-align: center;
+  background-color: #137A7F;
+  color: #fff;
+}
+
+#makers h3 {
+  font-family: 'Bitter', serif;
+}
+
+#makers p {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+#makers img {
+  border-radius:80px;
+  margin: 20px;
+}
+
+#article {
+  background-color: #86CECB;
+  color: #fff;
+  padding-top: 125px;
+  padding-bottom: 125px;
+}
+
+#article h1 {
+  font-family: 'Bitter', serif;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#article p {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+#layout-top {
+  padding-top: 125px;
+  padding-bottom: 85px;
+  text-align: center;
+  background-color: #86CECB;
+  color: #fff;
+  font-family: 'Bitter', serif;
+  font-weight: normal;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+#viz {
+  text-align: center;
+  background-color: #E3E4E9;
+  padding-bottom: 85px;
+}
+
+.sgraph-background {
+  background-color: #E3E4E9;
+  padding-bottom:85px;
+}
+
+#sgraph {
+  margin: 85px 0px 20px 300px;
+  font-family: 'Lato', san;
+}

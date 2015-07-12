@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400|Bitter:400' rel='stylesheet' type='text/css'>
+  <title>Audiolyzer Test</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" id="site-navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#about">Audiolyzer</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="page-scroll">
+            <a href="#about">About</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#audience">Audience</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#share">Share</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#makers">Makers</a>
+          </li>
+          <li>
+            <a href="{{ url_for('static', filename='sharkstory.html') }}" target="_blank">Article</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+
+    <div id="layout-top">
+      <div class="container">
+        <div class="row">
+          <h1>Audiolyzer</h1>
+          <h3>Listen to your data.</h3>
+        </div>
+      </div>
+    </div>
+
+<div class="row sgraph-background">
+    <button id="sgraph" onclick="female()">
+      <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
+      <p>Female</p>
+    </button>
+     <button id="sgraph" onclick="male()">
+      <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
+      <p>Male</p>
+    </button>
+     <button id="sgraph" onclick="playboth()">
+      <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
+      <p>Both</p>
+    </button>
+</div>
+
+<div id="viz">
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/tones.js') }}"></script>
+<script>
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x0 = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var x1 = d3.scale.ordinal();
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+var xAxis = d3.svg.axis()
+    .scale(x0)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickFormat(d3.format(".2s"));
+
+var svg = d3.select("#viz").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("{{ url_for('static', filename='csv/Shark_by_sex.csv') }}", function(error, data) {
+  if (error) throw error;
+
+  var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "Year"; });
+
+  data.forEach(function(d) {
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name]}; });
+  });
+
+  x0.domain(data.map(function(d) { return d.Year; }));
+  x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
+  y.domain([0, d3.max(data, function(d) { return d3.max(d.ages, function(d) { return d.value; }); })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Population");
+
+  var year = svg.selectAll(".year")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(" + x0(d.Year) + ",0)"; });
+
+  year.selectAll("rect")
+      .data(function(d) { return d.ages; })
+    .enter().append("rect")
+      .attr("width", x1.rangeBand())
+      .attr("x", function(d) { return x1(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .style("fill", function(d) { return color(d.name); });
+
+  var legend = svg.selectAll(".legend")
+      .data(ageNames.slice().reverse())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+
+});
+
+//// END D3
+//// START SOUND
+function female() {
+    tones.type = "sine";
+    tones.attack = 100;
+    tones.release = 100;
+
+    var timing = 250;
+    var index = 0;
+
+    var data = [0,0,0,0,0,0,2,0,0,1,1,0,3,0,2,1,2,0,2,2,0,1,2,1,3,1,1,0,0,0,0,0,2,0,1,0,1,0,1,1,0,2,1,4,0,2,1,2,2,5,5,3,2,6,2,1,7,2,2,0,1,2,2,0,3,5,2,0,0,0,5,3,7,5,7,4,2,4,6,3,4,5,5,8,6,10,2,7,5,8,12,12,9,12,14,14,16,30,13,16,22,13,18,17,21];
+    var srange = 3951.1 - 16.352; /*limits to peak octave of 8*/
+    var midc = 261.63; /*frequency of middle c*/
+    var max = Math.max.apply(Math, data),
+    min = Math.min.apply(Math,data),
+    l = data.length,
+    i;
+  for (i = 0; i < l; i++) {
+    data[i] = ((data[i] - min) / max) * srange + midc;
+    }
+    var prevTime = tones.getTimeMS();
+    var elapsed = 0
+    play();
+
+    function play() {
+        var now = tones.getTimeMS();
+        elapsed += now - prevTime;
+        if(elapsed > timing) {
+            elapsed -= timing;
+            var note = data[index]
+            if(note !== 0) {
+                tones.play(note);
+            }
+            index++;
+            /*index %= data.length;*/
+        }
+        prevTime = now;
+        requestAnimationFrame(play);
+
+    }
+}
+
+function male() {
+    tones.type = "sawtooth";
+    tones.attack = 100;
+    tones.release = 100;
+
+    var timing = 250;
+    var index = 0;
+
+    var data = [0,0,0,0,0,6,20,9,5,10,6,8,14,14,15,8,12,15,16,25,18,21,19,15,22,24,25,24,16,16,17,18,24,20,22,12,20,25,22,19,25,21,22,25,29,32,36,26,36,69,75,65,77,48,61,41,47,39,37,27,32,21,25,22,30,37,35,26,20,24,23,45,29,41,31,31,34,28,47,46,33,32,48,42,44,60,50,47,53,50,89,77,75,77,74,82,78,67,95,93,71,101,94,98,95];
+    var srange = 3951.1 - 16.352; /*limits to peak octave of 8*/
+    var midc = 261.63; /*frequency of middle c*/
+    var max = Math.max.apply(Math, data),
+    min = Math.min.apply(Math,data),
+    l = data.length,
+    i;
+  for (i = 0; i < l; i++) {
+    data[i] = ((data[i] - min) / max) * srange + midc;
+    }
+    var prevTime = tones.getTimeMS();
+    var elapsed = 0
+    play();
+
+    function play() {
+        var now = tones.getTimeMS();
+        elapsed += now - prevTime;
+        if(elapsed > timing) {
+            elapsed -= timing;
+            var note = data[index]
+            if(note !== 0) {
+                tones.play(note);
+            }
+            index++;
+            /*index %= data.length;*/
+        }
+        prevTime = now;
+        requestAnimationFrame(play);
+
+    }
+}
+
+function playboth() {
+  male();
+  female();
+}
+</script>
+
+</body>
+</html>
