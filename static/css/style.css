@@ -154,13 +154,10 @@ input {
   background-color: #E3E4E9;
 }
 
-#viz
-}
-
 .sgraph-background {
   background-color: #E3E4E9;
 }
 
 #sgraph {
-  text-align: center;
+  margin: 20px 0px 85px 625px;
 }
