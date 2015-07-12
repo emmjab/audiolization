@@ -120,7 +120,7 @@ input {
   background-color: #86CECB;
   color: #fff;
   padding-top: 125px;
-  padding-bottom: 85px;
+  padding-bottom: 125px;
 }
 
 #article h1 {
@@ -131,10 +131,11 @@ input {
 
 #article p {
   font-family: 'Lato', sans-serif;
+  font-size: 16px;
 }
 
 #layout-top {
-  padding-top: 85px;
+  padding-top: 125px;
   padding-bottom: 85px;
   text-align: center;
   background-color: #86CECB;
@@ -174,8 +175,10 @@ input {
 
 .sgraph-background {
   background-color: #E3E4E9;
+  padding-bottom:85px;
 }
 
 #sgraph {
-  margin: 85px 0px 20px 650px;
+  margin: 85px 0px 20px 300px;
+  font-family: 'Lato', san;
 }

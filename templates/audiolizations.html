@@ -12,6 +12,38 @@
 
 <body>
 
+  <nav class="navbar navbar-default navbar-fixed-top" id="site-navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#about">Audiolyzer</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="page-scroll">
+            <a href="#about">About</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#audience">Audience</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#share">Share</a>
+          </li>
+          <li class="page-scroll">
+            <a href="#makers">Makers</a>
+          </li>
+          <li>
+            <a href="{{ url_for('static', filename='sharkstory.html') }}" target="_blank">Article</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+
     <div id="layout-top">
       <div class="container">
         <div class="row">
@@ -24,12 +56,15 @@
 <div class="row sgraph-background">
     <button id="sgraph" onclick="female()">
       <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
+      <p>Female</p>
     </button>
      <button id="sgraph" onclick="male()">
       <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
+      <p>Male</p>
     </button>
      <button id="sgraph" onclick="playboth()">
       <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
+      <p>Both</p>
     </button>
 </div>
 
@@ -64,7 +99,7 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .tickFormat(d3.format(".2s"));
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#viz").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
