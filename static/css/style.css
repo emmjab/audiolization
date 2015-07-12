@@ -160,9 +160,11 @@ input {
   background-color: #E3E4E9;
 }
 
+#viz
+}
+
 #sgraph {
   text-align: center;
-  padding: 20px
-  /*margin: ;*/
-  margin: 580px 0px 85px 230px;
+  padding: 85px;
+  background-color: #E3E4E9;
 }
