@@ -83,3 +83,15 @@ input {
   border: none;
   margin: 10px;
 }
+
+#share {
+  padding-top: 85px;
+  padding-bottom: 85px;
+  text-align: center;
+  background-color: #86CECB;
+  color: #FFF;
+}
+
+#share a {
+  padding: 20px;
+}
