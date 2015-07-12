@@ -5,6 +5,10 @@
 {% endblock %}-->
 
 <head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
   <link href='http://fonts.googleapis.com/css?family=Lato:400|Bitter:400' rel='stylesheet' type='text/css'>
   <title>Audiolyzer Test</title>
@@ -18,15 +22,13 @@
   <h3>Listen to your data.</h3>
 </div>
 
-<div id="viz">
-</div>
-
-<div class="container sgraph-background">
-  <div class="row">
+<div class="row sgraph-background">
     <button id="sgraph" onclick="sgraph()">
       <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
     </button>
-  </div>
+</div>
+
+<div id="viz">
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>

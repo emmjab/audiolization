@@ -152,6 +152,7 @@ input {
 #viz {
   text-align: center;
   background-color: #E3E4E9;
+  padding-bottom: 85px;
 }
 
 .sgraph-background {
@@ -159,5 +160,5 @@ input {
 }
 
 #sgraph {
-  margin: 20px 0px 85px 625px;
+  margin: 85px 0px 20px 650px;
 }
