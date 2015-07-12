@@ -1,81 +1,96 @@
-<!--{% include 'layout.html' %}
+{% include 'layout.html' %}
 
 {% block style %}
+<style>
 
-{% endblock %}-->
+.bar {
+  fill: steelblue;
+}
 
-<head>
-  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400|Bitter:400' rel='stylesheet' type='text/css'>
-  <title>Audiolyzer Test</title>
-</head>
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+#viz {
+}
+
+</style>
+
+{% endblock %}
 
 {% block content %}
-<body>
+<div id="viz"></div>
+<button id="sgraph" onclick="sgraph()">PLEASE MAKE ME AN ICON</button>
 
-<div id="layout-top">
-  <h1>Audiolyzer</h1>
-  <h3>Listen to your data.</h3>
-</div>
-
-<div id="viz">
-</div>
-
-<div class="container">
-  <div class="row sgraph-background">
-    <button id="sgraph" onclick="sgraph()">
-      <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
-    </button>
-  </div>
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='js/tones.js') }}"></script>
 <script>
 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 1000 - margin.left - margin.right,
-    height = 1000 - margin.top - margin.bottom;
 
-var x = d3.scale.ordinal()
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x0 = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
+
+var x1 = d3.scale.ordinal();
 
 var y = d3.scale.linear()
     .range([height, 0]);
 
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
 var xAxis = d3.svg.axis()
-    .scale(x)
+    .scale(x0)
     .orient("bottom");
 
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
-    .ticks(10);
+    .tickFormat(d3.format(".2s"));
 
-var svg = d3.select("#viz").append("svg")
+var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-//d3.tsv("{{ url_for('static', filename='csv/data.tsv') }}", type, function(error, data) {
-d3.csv("{{ url_for('static', filename='csv/Shark_by_sex.csv') }}", type, function(error, data) {
+d3.csv("{{ url_for('static', filename='csv/Shark_by_sex.csv') }}", function(error, data) {
   if (error) throw error;
 
-  x.domain(data.map(function(d) { return d.Year; }));
-  y.domain([0, d3.max(data, function(d) { return d.Male; })]);
+  var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "Year"; });
+
+  data.forEach(function(d) {
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name]}; });
+  });
+
+  x0.domain(data.map(function(d) { return d.Year; }));
+  x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
+  y.domain([0, d3.max(data, function(d) { return d3.max(d.ages, function(d) { return d.value; }); })]);
 
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-      .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", "-0.5em")
-            .attr("transform", function(d) {
-                return "rotate(-90)" 
-                });
+      .call(xAxis);
 
   svg.append("g")
       .attr("class", "y axis")
@@ -85,22 +100,43 @@ d3.csv("{{ url_for('static', filename='csv/Shark_by_sex.csv') }}", type, functio
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Count");
+      .text("Population");
 
-  svg.selectAll(".bar")
+  var year = svg.selectAll(".year")
       .data(data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.Year); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.Male); })
-      .attr("height", function(d) { return height - y(d.Male); });
-});
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(" + x0(d.Year) + ",0)"; });
 
-function type(d) {
-  d.Male = +d.Male;
-  return d;
-}
+  year.selectAll("rect")
+      .data(function(d) { return d.ages; })
+    .enter().append("rect")
+      .attr("width", x1.rangeBand())
+      .attr("x", function(d) { return x1(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .style("fill", function(d) { return color(d.name); });
+
+  var legend = svg.selectAll(".legend")
+      .data(ageNames.slice().reverse())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+
+});
 
 
 
@@ -144,7 +180,7 @@ function sgraph() {
 
 </script>
 
-</body>
+
 
 
 {% endblock %}

@@ -75,6 +75,10 @@ def index():
 def upload_file():
 
     return render_template('audiolizations.html')
+
+@app.route('/sample', methods=['GET','POST'])
+def sample():
+    return render_template('sample.html')
 # @app.route('/test', methods=['GET', 'POST'])
 # def upload_file():
 #     if request.method == 'POST':
