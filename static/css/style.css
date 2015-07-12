@@ -157,8 +157,10 @@ input {
 #viz
 }
 
+.sgraph-background {
+  background-color: #E3E4E9;
+}
+
 #sgraph {
   text-align: center;
-  padding: 85px;
-  background-color: #E3E4E9;
 }
