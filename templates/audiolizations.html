@@ -7,9 +7,21 @@
   fill: steelblue;
 }
 
+<<<<<<< HEAD
 .bar:hover {
   fill: brown;
 }
+=======
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400|Bitter:400' rel='stylesheet' type='text/css'>
+  <title>Audiolyzer Test</title>
+</head>
+>>>>>>> origin/master
 
 .axis {
   font: 10px sans-serif;
@@ -26,6 +38,7 @@
   display: none;
 }
 
+<<<<<<< HEAD
 #viz {
 }
 
@@ -37,6 +50,16 @@
 <div id="viz"></div>
 <button id="sgraph" onclick="sgraph()">PLEASE MAKE ME AN ICON</button>
 
+=======
+<div class="row sgraph-background">
+    <button id="sgraph" onclick="sgraph()">
+      <img src="http://uxrepo.com/static/icon-sets/elusive/svg/play-circled2.svg" alt="Play sound graph" width="50" height="50"/>
+    </button>
+</div>
+
+<div id="viz">
+</div>
+>>>>>>> origin/master
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='js/tones.js') }}"></script>
