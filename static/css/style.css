@@ -122,14 +122,8 @@ input {
   text-align: center;
   background-color: #86CECB;
   color: #fff;
-}
-
-#layout-top h1 {
   font-family: 'Bitter', serif;
-}
-
-#layout-top h3 {
-  font-family: 'Bitter', serif;
+  font-weight: normal;
 }
 
 .bar {
