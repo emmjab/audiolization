@@ -71,8 +71,10 @@
 <div id="viz">
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='js/tones.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/papaparse.js') }}"></script>
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -171,6 +173,7 @@ d3.csv("{{ url_for('static', filename='csv/Shark_by_sex.csv') }}", function(erro
 
 //// END D3
 //// START SOUND
+
 function female() {
     tones.type = "sine";
     tones.attack = 100;
